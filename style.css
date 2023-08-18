@@ -1,0 +1,72 @@
+/* Config for small screens*/
+@media only screen and (min-width:320px) {
+    body {
+        min-height: 97vh;
+        background:linear-gradient(25deg,#5426e9, hsl(236, 57%, 20%));
+        margin: 0;
+        background-repeat: no-repeat;
+        font-family: 'DM Sans';
+        font-size: 1em;
+        color: #FEE715;
+        text-align: center;
+    }
+    .content {
+        margin: 0;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+    }
+    a {
+        text-decoration: none;
+        color:#FEE715
+    }
+    ul {
+        display: inline;
+    }
+    .nav-bar {
+        text-align: right;
+        margin-top: 2.5vh;
+        margin-right: 2em;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+}
+
+/* Config for small devices and most mobile phones*/
+@media screen and (min-width:480px) {
+    body {
+        background:linear-gradient(25deg,#5426e9, hsl(236, 57%, 20%));
+        margin: 0;
+        background-repeat: no-repeat;
+        font-family: 'DM Sans';
+        font-size: 1em;
+        color: #FEE715;
+        text-align: center;
+    }
+    .content {
+        margin: 0;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+    }
+    a {
+        text-decoration: none;
+        color:#FEE715
+    }
+    ul {
+        display: inline;
+    }
+    .nav-bar {
+        text-align: right;
+        margin-top: 2.5vh;
+        margin-right: 2em;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+}
