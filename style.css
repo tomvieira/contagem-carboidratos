@@ -15,6 +15,7 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
+        padding-bottom: 6vh;
     }
     a {
         text-decoration: none;
@@ -52,6 +53,7 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
+        padding-bottom: 6vh;
     }
     a {
         text-decoration: none;
