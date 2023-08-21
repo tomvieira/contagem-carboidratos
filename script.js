@@ -26,7 +26,8 @@ async function fetchDataAndPopulateList() {
 
         // Populate the list with data
         dataArray.forEach(itemData => {
-            const listItem = document.createElement('li');
+            //const listItem = document.createElement('li');
+            const listItem = document.createElement('option');
             listItem.textContent = `${itemData.item}`;
             listContainer.appendChild(listItem);
         });
