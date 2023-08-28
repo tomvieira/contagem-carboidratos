@@ -24,6 +24,9 @@
     ul {
         display: inline;
     }
+    p {
+        padding: 0em 2em 0em 2em;
+    }
     .nav-bar {
         text-align: right;
         margin-top: 2.5vh;
@@ -39,7 +42,7 @@
 /* Config for small devices and most mobile phones*/
 @media screen and (min-width:480px) {
     body {
-        min-height: 98vh;
+        min-height: 97vh;
         background:linear-gradient(25deg,#5426e9, hsl(236, 57%, 20%));
         margin: 0;
         background-repeat: no-repeat;
@@ -61,6 +64,9 @@
     }
     ul {
         display: inline;
+    }
+    p {
+        padding: 0em 2em 0em 2em;
     }
     .nav-bar {
         text-align: right;
