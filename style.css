@@ -16,6 +16,9 @@
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
     }
+    h1 {
+        font-size: 2em;
+    }
     a {
         text-decoration: none;
         color:#FEE715
@@ -78,6 +81,9 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
+    }
+    h1 {
+        font-size: 1.8em;
     }
     a {
         text-decoration: none;
