@@ -37,12 +37,38 @@
         -webkit-user-select: none;
         touch-action: manipulation;
     }
+    .image_box {
+        display: flex;
+        justify-content: center;
+        padding-top: 5vh;
+    }
+    .image_container {
+        text-align: center; 
+        margin: 0 0.8em; 
+    }
+    .image_container:hover {
+        transform: scale(1.1); 
+        transition: 0.3s ease;
+    }
+    .menu, .calculator {
+        width: 5em;
+        padding: 0.2em;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    p {
+        margin-top: 1vh;
+    }
 }
 
 /* Config for small devices and most mobile phones*/
 @media screen and (min-width:480px) {
     body {
-        min-height: 98vh;
+        min-height: 97vh;
         background:linear-gradient(25deg,#5426e9, hsl(236, 57%, 20%));
         margin: 0;
         background-repeat: no-repeat;
@@ -77,5 +103,31 @@
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
         touch-action: manipulation;
+    }
+    .image_box {
+        display: flex;
+        justify-content: center;
+        padding-top: 5vh;
+    }
+    .image_container {
+        text-align: center; 
+        margin: 0 0.8em; 
+    }
+    .image_container:hover {
+        transform: scale(1.1); 
+        transition: 0.3s ease;
+    }
+    .menu, .calculator {
+        width: 5em;
+        padding: 0.2em;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    p {
+        margin-top: 1vh;
     }
 }
