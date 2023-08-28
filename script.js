@@ -1,57 +1,133 @@
-// Calls the populate list function on page load
-window.onload = function() {
-    fetchDataAndPopulateList();
-};
+// Carrega o script depois que todos os elementos da página são carregados
+document.addEventListener("DOMContentLoaded", function() {
+    // Chama a função que preenche a lista assim que a página carrega
+    window.onload = function() {
+        console.log("Função onload iniciada"); // Log de debug
+        const selectElement = document.getElementById("foodList");
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const selectedOptionId = selectedOption.id;
+        
+        console.log("ID da opção selecionada:" + selectedOptionId); // Log de debug
 
-async function fetchDataAndPopulateList() {
-    try {
-        const response = await fetch('./res/tabela_de_alimentos.csv');
-        const data = await response.text();
+        // Chama a função com o ID da opção selecionada
+        fetchDataAndPopulateList(selectedOptionId);
+    }
 
-        const lines = data.split('\n');
-        const dataArray = [];
+    // Adiciona um event listener para detectar mudança na lista de tipo de alimentos
+    document.getElementById("foodList").addEventListener("change", function() {
+        console.log("Mudança detectada.") // Log de debug
+        const selectElement = document.getElementById("foodList");
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const selectedOptionId = selectedOption.id;
+        
+        // Chama a função que preenche a segunda lista com base na opção selecionada na primeira lista
+        fetchDataAndPopulateList(selectedOptionId);
+    });
 
-        for (let i = 1; i < lines.length; i++) {
-            const line = lines[i];
-            const items = parseCSVLine(line);
+    async function fetchDataAndPopulateList(selectedOptionId) {
+        try {
+            console.log("Capturando e preenchendo a lista para a opção:" + selectedOptionId); // Log de debug
+            let csvFilePath = ''; // Inicializa o caminho do arquivo CSV dependendo da opção selecionada
 
-            if (items.length > 0) {
-                const item = items[0];
-                dataArray.push({ item });
+            // Determina o acesso ao caminho do arquivo CSV dependendo da opção selecionada
+            switch (selectedOptionId) {
+                case "tb1": // Tabela padrão
+                    csvFilePath = './res/tabela_de_alimentos.csv';
+                    break;
+                case "tb2": // Cantina escolar
+                    csvFilePath = './res/tabela_cantina_escolar.csv';
+                    break;
+                case "tb3": // Cantina italiana
+                    csvFilePath = './res/tabela_cantina_italiana.csv';
+                    break;
+                case "tb4": // Casamento
+                    csvFilePath = './res/tabela_casamento.csv';
+                    break;
+                case "tb5": // Churrascaria
+                    csvFilePath = './res/tabela_churrascaria.csv';
+                    break;
+                case "tb6": // Comida árabe
+                    csvFilePath = './res/tabela_comida_arabe.csv';
+                    break;
+                case "tb7": // Comida japonesa
+                    csvFilePath = './res/tabela_comida_japonesa.csv';
+                    break;
+                case "tb8": // Culinária alemã
+                    csvFilePath = './res/tabela_culinaria_alema.csv';
+                    break;
+                case "tb9": // Doces
+                    csvFilePath = './res/tabela_doces.csv';
+                    break;
+                case "tb10": // Festa de aniversário
+                    csvFilePath = './res/tabela_festa_aniversario.csv';
+                    break;
+                case "tb11": // Festa junina
+                    csvFilePath = './res/tabela_festa_junina.csv';
+                    break;
+                case "tb12": // Natal
+                    csvFilePath = './res/tabela_natal.csv';
+                    break;
+                case "tb13": // Páscoa
+                    csvFilePath = './res/tabela_pascoa.csv';
+                    break;
+                case "tb14": // Pizza 
+                    csvFilePath = './res/tabela_pizzas.csv';
+                    break;
+                case "tb15": // Sorvetes
+                    csvFilePath = './res/tabela_sorvetes.csv';
+                    break;
+                default:
+                    console.log("Opção desconhecida selecionada.");
+                    return; // Sai da função se for selecionada uma opção desconhecida
+            }
+
+            const response = await fetch(csvFilePath);
+            const data = await response.text();
+
+            const lines = data.split('\n');
+            const dataArray = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i];
+                const items = parseCSVLine(line);
+
+                if (items.length > 0) {
+                    const item = items[0];
+                    dataArray.push({ item });
+                }
+            }
+
+            const listContainer = document.getElementById('listContainer');
+
+            // Populate the select element with data
+            listContainer.innerHTML = ''; // Limpa as opções anteriores
+            dataArray.forEach(itemData => {
+                const option = document.createElement('option');
+                option.textContent = `${itemData.item}`;
+                listContainer.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Erro buscando ou carregando os dados:', error);
+        }
+    }
+
+    function parseCSVLine(line) {
+        const items = [];
+        let currentItem = '';
+        let withinQuotes = false;
+
+        for (const char of line) {
+            if (char === ',' && !withinQuotes) {
+                items.push(currentItem.trim());
+                currentItem = '';
+            } else if (char === '"') {
+                withinQuotes = !withinQuotes;
+            } else {
+                currentItem += char;
             }
         }
 
-        const listContainer = document.getElementById('listContainer');
-        console.log(dataArray);
-
-        // Populate the list with data
-        dataArray.forEach(itemData => {
-            //const listItem = document.createElement('li');
-            const listItem = document.createElement('option');
-            listItem.textContent = `${itemData.item}`;
-            listContainer.appendChild(listItem);
-        });
-    } catch (error) {
-        console.error('Erro buscando ou carregando os dados:', error);
+        items.push(currentItem.trim());
+        return items;
     }
-}
-
-function parseCSVLine(line) {
-    const items = [];
-    let currentItem = '';
-    let withinQuotes = false;
-
-    for (const char of line) {
-        if (char === ',' && !withinQuotes) {
-            items.push(currentItem.trim());
-            currentItem = '';
-        } else if (char === '"') {
-            withinQuotes = !withinQuotes;
-        } else {
-            currentItem += char;
-        }
-    }
-
-    items.push(currentItem.trim());
-    return items;
-}
+});
