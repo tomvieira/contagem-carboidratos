@@ -15,7 +15,6 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
-        padding-bottom: 6vh;
     }
     a {
         text-decoration: none;
@@ -24,12 +23,9 @@
     ul {
         display: inline;
     }
-    p {
-        padding: 0em 2em 0em 2em;
-    }
     .nav-bar {
         text-align: right;
-        margin-top: 2.5vh;
+        padding-top: 4vh;
         margin-right: 2em;
         cursor: pointer;
         user-select: none;
@@ -40,7 +36,7 @@
     .image_box {
         display: flex;
         justify-content: center;
-        padding-top: 5vh;
+        padding-top: 4vh;
     }
     .image_container {
         text-align: center; 
@@ -48,11 +44,11 @@
     }
     .image_container:hover {
         transform: scale(1.1); 
-        transition: 0.3s ease;
+        transition: 0.5s ease;
     }
     .menu, .calculator {
         width: 5em;
-        padding: 0.2em;
+        padding: 2vh;
         cursor: pointer;
         outline: none;
         user-select: none;
@@ -61,7 +57,7 @@
         touch-action: manipulation;
     }
     p {
-        margin-top: 1vh;
+        padding: 0em 2em 0em 2em;
     }
 }
 
@@ -82,7 +78,6 @@
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-user-select: none;
-        padding-bottom: 6vh;
     }
     a {
         text-decoration: none;
@@ -91,12 +86,9 @@
     ul {
         display: inline;
     }
-    p {
-        padding: 0em 2em 0em 2em;
-    }
     .nav-bar {
         text-align: right;
-        margin-top: 2.5vh;
+        padding-top: 4vh;
         margin-right: 2em;
         cursor: pointer;
         user-select: none;
@@ -107,7 +99,7 @@
     .image_box {
         display: flex;
         justify-content: center;
-        padding-top: 5vh;
+        padding-top: 4vh;
     }
     .image_container {
         text-align: center; 
@@ -115,11 +107,11 @@
     }
     .image_container:hover {
         transform: scale(1.1); 
-        transition: 0.3s ease;
+        transition: 0.5s ease;
     }
     .menu, .calculator {
         width: 5em;
-        padding: 0.2em;
+        padding: 2vh;
         cursor: pointer;
         outline: none;
         user-select: none;
@@ -128,6 +120,6 @@
         touch-action: manipulation;
     }
     p {
-        margin-top: 1vh;
+        padding: 0em 2em 0em 2em;
     }
 }
