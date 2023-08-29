@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // constante que captura as calorias do item do arquivo CSV selecionado
                     const calorias = items[4];
                     dataArray.push({ item, calorias });
+                    
                 }
             }
 
@@ -110,19 +111,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 listContainer.appendChild(option);
 
                 const caloriasParagraph = document.getElementById('calorias');
-                // Atualiza o elemento com o valor da caloria
-                caloriasParagraph.textContent = `${itemData.calorias} kcal`;
-            });
-
-            // Adiciona um event listener que detecta mudanças na segunda lista
-            listContainer.addEventListener('change', (event) => {
-                const selectedOptionIndex = event.target.selectedIndex;
+                const selectedOptionIndex = listContainer.selectedIndex;
                 const selectedOptionData = dataArray[selectedOptionIndex];
+                // Atualiza o elemento com base no elemento selecionado na segunda lista
+                caloriasParagraph.textContent = `${selectedOptionData.calorias} kcal`;
 
-            // Atualiza o elemento com base no elemento selecionado na segunda lista
-            const caloriasParagraph = document.getElementById('calorias');
-            caloriasParagraph.textContent = `${selectedOptionData.calorias} kcal`;
-    });
+                // Adiciona um event listener que detecta mudanças na segunda lista
+                listContainer.addEventListener('change', (event) => {
+                    const selectedOptionIndex = event.target.selectedIndex;
+                    const selectedOptionData = dataArray[selectedOptionIndex];
+                    // Atualiza o elemento com base no elemento selecionado na segunda lista
+                    caloriasParagraph.textContent = `${selectedOptionData.calorias} kcal`;
+                });
+            });
         } catch (error) {
             console.error('Erro buscando ou carregando os dados:' + error);
         }
