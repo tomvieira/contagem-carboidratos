@@ -2,12 +2,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Chama a função que preenche as informações assim que a página carrega
     window.onload = function() {
-        console.log('Função onload iniciada'); // Log de debug
+        //console.log('Função onload iniciada'); // Log de debug
+        // Atribui o elemento HTML especificado à constante
         const selectElement = document.getElementById('foodList');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
         const selectedOptionId = selectedOption.id;
         
-        console.log('ID da opção selecionada: ' + selectedOptionId); // Log de debug
+        //console.log('ID da opção selecionada: ' + selectedOptionId); // Log de debug
 
         // Chama a função com o ID da opção selecionada
         fetchDataAndPopulateList(selectedOptionId);
@@ -15,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adiciona um event listener para detectar mudança na lista de tipo de alimentos
     document.getElementById('foodList').addEventListener('change', function() {
-        console.log('Mudança detectada.') // Log de debug
+        //console.log('Mudança detectada.') // Log de debug
+        // Atribui o elemento HTML especificado à constante
         const selectElement = document.getElementById('foodList');
         const selectedOption = selectElement.options[selectElement.selectedIndex];
         const selectedOptionId = selectedOption.id;
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function fetchDataAndPopulateList(selectedOptionId) {
         try {
-            console.log('Capturando e preenchendo a lista para a opção: ' + selectedOptionId); // Log de debug
+            //console.log('Capturando e preenchendo a lista para a opção: ' + selectedOptionId); // Log de debug
             let csvFilePath = ''; // Inicializa o caminho do arquivo CSV dependendo da opção selecionada
 
             // Determina o acesso ao caminho do arquivo CSV dependendo da opção selecionada
@@ -92,47 +94,78 @@ document.addEventListener('DOMContentLoaded', function() {
                 const items = parseCSVLine(line);
 
                 if (items.length > 0) {
-                    // constante que captura o nome do item do arquivo CSV selecionado
+                    // Constante que captura o nome do item do arquivo CSV selecionado
                     const item = items[0];
-                    // constante que captura o valor do carboidrato (CHO) do item do arquivo CSV selecionado
+                    // Constante que captura a medida usual do item do arquivo CSV selecionado
+                    const measure = items[1];
+                    // Constante que captura o peso do item do arquivo CSV selecionado
+                    const weight = items[2];
+                    // Constante que captura o valor do carboidrato (CHO) do item do arquivo CSV selecionado
                     const carb = items[3];
-                    // armazena os valores dos items e dos carboidreatos na array
-                    dataArray.push({ item, carb });
+                    // Armazena os valores dos items e dos carboidreatos na array
+                    dataArray.push({ item, measure, weight, carb });
                 }
             }
-
+            // Atribui o elemento HTML especificado à constante
             const listContainer = document.getElementById('listContainer');
             // Limpa as opções anteriores
             listContainer.innerHTML = ''; 
             // Para cada item da array
             dataArray.forEach(itemData => {
-                // cria uma opção dentro da tag select
+                // Cria uma opção dentro da tag select
                 const option = document.createElement('option');
-                // adicionando o nome do item
+                // Adicionando o nome do item
                 option.textContent = `${itemData.item}`;
-                // ao container como seu filho
+                // Ao container, como seu filho
                 listContainer.appendChild(option);
-                // atribui o elemento carbs a uma constante
-                const caloriasParagraph = document.getElementById('carbs');
-                // recupera a opção selecionada no container
+                // Atribui o elemento carbs a uma constante
+                const carbsParagraph = document.getElementById('carbs');
+                // Atribui o peso informado a uma constante
+                const inputWeight = document.getElementById('i_weight');
+                // Recupera a opção selecionada no container
                 const selectedOptionIndex = listContainer.selectedIndex;
-                // verifica o index do item selecionado
+                // Verifica o index do item selecionado
                 const selectedOptionData = dataArray[selectedOptionIndex];
                 /* Atualiza o elemento carbs com o valor das calorias correspondente ao 
                 index do item selecionado*/
-                caloriasParagraph.textContent = `${selectedOptionData.carb} CHO`;
+                let result = (inputWeight.value * parseFloat(selectedOptionData.carb)) / parseFloat(selectedOptionData.weight);
+                // arredonda o resultado
+                result = Math.ceil(result);
+                // Atualiza o elemento com base no elemento selecionado na segunda lista
+                carbsParagraph.textContent = `${result} CHO`;
+                //console.log(`${result} CHO`); // Log de debug
                 
-                // Adiciona um event listener que detecta mudanças na lista de alimentos
-                listContainer.addEventListener('change', (event) => {
-                    // recupera a opção selecionada no container
-                    const selectedOptionIndex = event.target.selectedIndex;
-                    // verifica o index do item selecionado
-                    const selectedOptionData = dataArray[selectedOptionIndex];
-                    // Atualiza o elemento com base no elemento selecionado na segunda lista
-                    caloriasParagraph.textContent = `${selectedOptionData.carb} CHO`;
-                });
+            // Adiciona um event listener que detecta mudanças na lista de alimentos
+            listContainer.addEventListener('change', (event) => {
+                // Recupera a opção selecionada no container
+                const selectedOptionIndex = event.target.selectedIndex;
+                // Verifica o index do item selecionado
+                const selectedOptionData = dataArray[selectedOptionIndex];
+                // Calcula o resultado seguindo a regra da fórmula de três
+                let result = (inputWeight.value * parseFloat(selectedOptionData.carb)) / parseFloat(selectedOptionData.weight);
+                // Arredonda o resultado
+                result = Math.ceil(result);
+                // Atualiza o elemento com base no elemento selecionado na segunda lista
+                carbsParagraph.textContent = `${result} CHO`;
             });
-        // lida com erros
+
+            // Adiciona um event listener que detecta mudanças no peso do alimento
+            inputWeight.addEventListener('input', (event) => {
+                //console.log('Input weight changed'); // Log de debug
+                // Recupera a opção selecionada no container
+                const selectedOptionIndex = listContainer.selectedIndex;
+                // Verifica o index do item selecionado
+                const selectedOptionData = dataArray[selectedOptionIndex];
+                // Recalcula o resultado seguindo a regra da fórmula de três
+                let result = (inputWeight.value * parseFloat(selectedOptionData.carb)) / parseFloat(selectedOptionData.weight);
+                // Arredonda o resultado
+                result = Math.ceil(result);
+                // Atualiza o elemento com base no elemento selecionado na segunda lista
+                carbsParagraph.textContent = `${result} CHO`;
+            });
+
+        });
+        // Lida com erros
         } catch (error) {
             console.error('Erro buscando ou carregando os dados:' + error);
         }
