@@ -1,6 +1,6 @@
 // Carrega o script depois que todos os elementos da página são carregados
 document.addEventListener('DOMContentLoaded', function() {
-    // Chama a função que preenche a lista assim que a página carrega
+    // Chama a função que preenche as informações assim que a página carrega
     window.onload = function() {
         console.log('Função onload iniciada'); // Log de debug
         const selectElement = document.getElementById('foodList');
@@ -94,42 +94,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (items.length > 0) {
                     // constante que captura o nome do item do arquivo CSV selecionado
                     const item = items[0];
-                    // constante que captura as calorias do item do arquivo CSV selecionado
-                    const calorias = items[4];
-                    dataArray.push({ item, calorias });
-                    
+                    // constante que captura o valor do carboidrato (CHO) do item do arquivo CSV selecionado
+                    const carb = items[3];
+                    // armazena os valores dos items e dos carboidreatos na array
+                    dataArray.push({ item, carb });
                 }
             }
 
             const listContainer = document.getElementById('listContainer');
-
-            // Populate the select element with data
-            listContainer.innerHTML = ''; // Limpa as opções anteriores
+            // Limpa as opções anteriores
+            listContainer.innerHTML = ''; 
+            // Para cada item da array
             dataArray.forEach(itemData => {
+                // cria uma opção dentro da tag select
                 const option = document.createElement('option');
+                // adicionando o nome do item
                 option.textContent = `${itemData.item}`;
+                // ao container como seu filho
                 listContainer.appendChild(option);
-
-                const caloriasParagraph = document.getElementById('calorias');
+                // atribui o elemento carbs a uma constante
+                const caloriasParagraph = document.getElementById('carbs');
+                // recupera a opção selecionada no container
                 const selectedOptionIndex = listContainer.selectedIndex;
+                // verifica o index do item selecionado
                 const selectedOptionData = dataArray[selectedOptionIndex];
-                // Atualiza o elemento com base no elemento selecionado na segunda lista
-                caloriasParagraph.textContent = `${selectedOptionData.calorias} kcal`;
-
-                // Adiciona um event listener que detecta mudanças na segunda lista
+                /* Atualiza o elemento carbs com o valor das calorias correspondente ao 
+                index do item selecionado*/
+                caloriasParagraph.textContent = `${selectedOptionData.carb} CHO`;
+                
+                // Adiciona um event listener que detecta mudanças na lista de alimentos
                 listContainer.addEventListener('change', (event) => {
+                    // recupera a opção selecionada no container
                     const selectedOptionIndex = event.target.selectedIndex;
+                    // verifica o index do item selecionado
                     const selectedOptionData = dataArray[selectedOptionIndex];
                     // Atualiza o elemento com base no elemento selecionado na segunda lista
-                    caloriasParagraph.textContent = `${selectedOptionData.calorias} kcal`;
+                    caloriasParagraph.textContent = `${selectedOptionData.carb} CHO`;
                 });
             });
+        // lida com erros
         } catch (error) {
             console.error('Erro buscando ou carregando os dados:' + error);
         }
     }
     
-    // Função que corrige o item no caso de uso de aspas duplas
+    // Função que formata o texto do item no caso de uso de aspas duplas
     function parseCSVLine(line) {
         const items = [];
         let currentItem = '';
@@ -145,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentItem += char;
             }
         }
-
         items.push(currentItem.trim());
         return items;
     }
