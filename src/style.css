@@ -114,11 +114,14 @@
         padding: 1em 0.5em;
     }
     #addButton {
-        background-color: #FEE715;
+        background-color: #e5ff00af;
         color: black;
         padding: 0.5em 0.5em;
         border-radius: 0.8em;
         font-style: normal;
+    }
+    #addButton:hover {
+        background-color: #FEE715;
     }
     p {
         padding: 0em 2em 0em 2em;
@@ -277,11 +280,14 @@
         padding: 1em 0.5em;
     }
     #addButton {
-        background-color: #FEE715;
+        background-color: #e5ff00af;
         color: black;
         padding: 0.5em 0.5em;
         border-radius: 0.8em;
         font-style: normal;
+    }
+    #addButton:hover {
+        background-color: #FEE715;
     }
     p {
         padding: 0em 2em 0em 2em;
