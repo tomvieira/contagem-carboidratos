@@ -103,6 +103,9 @@
         -webkit-user-select: none;
         touch-action: manipulation;
     }
+    .menu {
+        filter: grayscale(100%);
+    }
     .foodList, .listContainer {
         width: 10em;
     }
@@ -114,6 +117,7 @@
         padding: 1em 0.5em;
     }
     #addButton {
+        transition: 0.8s ease;
         background-color: #e5ff00af;
         color: black;
         padding: 0.5em 0.5em;
@@ -121,6 +125,7 @@
         font-style: normal;
     }
     #addButton:hover {
+        transition: 0.8s ease;
         background-color: #FEE715;
     }
     p {
