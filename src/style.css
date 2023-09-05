@@ -162,6 +162,9 @@
         padding: 10px;
         cursor: pointer;
     }
+    #cartModal {
+        overflow-y: auto;
+    }
 
     footer {
         margin-top: auto;
