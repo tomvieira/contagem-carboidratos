@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const listContainer = document.getElementById('listContainer');
     const cartIcon = document.getElementById('cart');
     const cartItemsList = document.getElementById('cartItemsList');
+    const inputWeight = document.getElementById('i_weight');
 
     // Chama a função que preenche as informações assim que a página carrega
     window.onload = function() {
@@ -217,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const carbsParagraph = document.getElementById('carbs');
             
             // Calcula os carboidratos quando o número do peso é alterado
-            const inputWeight = document.getElementById('i_weight');
+            //const inputWeight = document.getElementById('i_weight');
             listContainer.addEventListener('change', () => {
                 const selectedOptionIndex = listContainer.selectedIndex;
                 const selectedOptionData = dataArray[selectedOptionIndex];
@@ -233,8 +234,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 let result = (inputWeight.value * parseFloat(selectedOptionData.carb)) / parseFloat(selectedOptionData.weight);
                 result = Math.ceil(result);
                 carbsParagraph.textContent = `${result} CHO`;
-            });            
+            });      
+            
+            // Zera o peso e os carboidratos quando a lista de alimentos é alterada
+            document.getElementById('foodList').addEventListener('change', function() {
+                inputWeight.value = '0';
+                // Reseta os carboidratos
+                carbsParagraph.textContent = '';
+                const selectElement = document.getElementById('foodList');
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const selectedOptionId = selectedOption.id;
+                // Chama a função que preenche a lisa
+                fetchDataAndPopulateList(selectedOptionId);
+            });
 
+        // Em caso de erro
         } catch (error) {
             console.error('Erro buscando ou carregando os dados:' + error);
         }
