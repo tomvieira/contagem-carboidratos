@@ -40,12 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
             item: selectedOptionData.item,
             carbValue: carbsValue,
         };
-        // Adiciona o objeto criado acima à lista
-        cartList.push(cartItem);
-        // Soma 1 na contagem de itens do carrinho
-        cartCount++;
-        // Chama a função que atualiza os itens do carrinho
-        updateCartDisplay();
+        if (carbsValue.length > 0) {
+            // Adiciona o objeto criado acima à lista
+            cartList.push(cartItem);
+            // Soma 1 na contagem de itens do carrinho
+            cartCount++;
+            // Chama a função que atualiza os itens do carrinho
+            updateCartDisplay();
+        } else {
+            // do nothing
+        }
+        
     });
 
     // Adiciona um event listener para detectar quando há clique no carrinho
