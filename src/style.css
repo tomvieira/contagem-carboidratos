@@ -103,9 +103,6 @@
         -webkit-user-select: none;
         touch-action: manipulation;
     }
-    .menu {
-        filter: grayscale(100%);
-    }
     .foodList, .listContainer {
         width: 10em;
     }
