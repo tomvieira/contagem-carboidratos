@@ -1,0 +1,9 @@
+#saveCalc {
+    transition: 0.8s ease;
+    background-color: #e5f000;
+    color: black;
+    padding: 0.5em 0.5em;
+    border-radius: 0.8em;
+    font-style: normal;
+    cursor: pointer;
+}

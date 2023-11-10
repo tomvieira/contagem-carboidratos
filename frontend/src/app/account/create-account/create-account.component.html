@@ -1,0 +1,53 @@
+<div class="page">
+  <p class="{{msgClass}}" *ngIf="message">{{message}}</p>
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm" class="formLogin">
+    <h2>Criar minha conta</h2>
+    <label>Usuário</label>
+    <input class="form-control" type="text" name="nome" id="nome" #nome="ngModel" [(ngModel)]="account.username"
+      required minlength="3" />
+    <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert danger">
+      <div [hidden]="!nome.errors['required']">
+        Digite o nome de usuário.
+      </div>
+      <div [hidden]="!nome.errors['minlength']">
+        O nome de usuário deve conter pelo menos 3 caracteres.
+      </div>
+    </div>
+
+    <label>E-mail</label>
+    <input class="form-control" type="email" #email="ngModel" name="email" id="email" [(ngModel)]="account.email"
+      required />
+    <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert danger">
+      <div [hidden]="!email.errors['required']">
+        Digite o e-mail.
+      </div>
+    </div>
+
+    <label>Senha</label>
+    <input class="form-control" #password="ngModel" type="password" name="password" id="password"
+      [(ngModel)]="account.password1" required minlength="6" />
+    <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert danger">
+      <div [hidden]="!password.errors['required']">
+        Digite uma senha.
+      </div>
+      <div [hidden]="!password.errors['minlength']">
+        A senha deve conter pelo menos 6 caracteres.
+      </div>
+    </div>
+
+    <label>Senha Novamente</label>
+    <input class="form-control" #password2="ngModel" type="password" name="password" id="password"
+      [(ngModel)]="account.password2" required minlength="6" />
+    <div *ngIf="password2.errors && (password2.dirty || password2.touched)" class="alert danger">
+      <div [hidden]="!password2.errors['required']">
+        Digite uma senha.
+      </div>
+      <div [hidden]="!password2.errors['minlength']">
+        A senha deve conter pelo menos 6 caracteres.
+      </div>
+    </div>
+
+    <input type="submit" class="btn" [disabled]="form.form.invalid" value="Criar minha conta" />
+  </form>
+</div>

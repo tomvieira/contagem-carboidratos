@@ -1,0 +1,30 @@
+<div class="page">
+  <p class="{{msgClass}}" *ngIf="message">{{message}}</p>
+  <form (ngSubmit)="onSubmit()" #form="ngForm" class="formLogin">
+    <h1>Login</h1>
+    <label for="email">E-mail</label>
+    <input type="email" placeholder="Digite seu e-mail" autofocus="true" #email="ngModel" [(ngModel)]="login.email"
+      required minlength="5" name="email" id="email" />
+    <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert danger">
+      <div [hidden]="!email.errors['required']">
+        Digite o e-mail.
+      </div>
+      <div [hidden]="!email.errors['minlength']">
+        O email deve conter pelo menos 5 caracteres.
+      </div>
+    </div>
+    <label for="password">Senha</label>
+    <input type="password" placeholder="Digite sua senha" [(ngModel)]="login.password" #password="ngModel" required
+      minlength="6" name="password" id="password">
+    <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert danger">
+      <div [hidden]="!password.errors['required']">
+        Digite uma senha.
+      </div>
+      <div [hidden]="!password.errors['minlength']">
+        A senha deve conter pelo menos 6 caracteres.
+      </div>
+    </div>
+    <a routerLink="/create-account">Registrar uma conta</a>
+    <input type="submit" value="Acessar" class="btn" [disabled]="form.form.invalid" />
+  </form>
+</div>

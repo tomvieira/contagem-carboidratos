@@ -1,0 +1,23 @@
+<section>
+    <h1>Histórico do Usuário</h1>
+
+
+    <input type="text" id="myInput" onkeyup="myFunction();" placeholder="Buscar por alimentos.." title="Type in a name">
+
+    <table id="myTable" align="center">
+        <tr class="header">
+            <th>Data</th>
+            <th>Alimento</th>
+            <th>Carboidrato</th>
+            <th>Peso</th>
+        </tr>
+        <tr *ngFor="let item of listItems">
+            <td>{{item.data_calculo | date :'dd/MM/yyyy HH:mm'}}</td>
+            <td>{{item.alimento}}</td>
+            <td>{{item.carboidrato}}</td>
+            <td>{{item.peso}}</td>
+        </tr>
+    </table>
+
+
+</section>

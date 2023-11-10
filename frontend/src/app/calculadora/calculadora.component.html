@@ -1,0 +1,22 @@
+<section>
+    <h1>Calculadora de Carboidratos</h1>
+    <!--<p>Teste de importação de dados do arquivo CSV:</p>-->
+    <p>Escolha o tipo de tabela abaixo:</p>
+    <select id="foodList" class="foodList" [(ngModel)]="tipoAlimentoSel.id" (change)="loadAlimentos()">
+        <option *ngFor="let tipo of tipoAlimentos" value={{tipo.id}}>
+            {{tipo.nome}}
+    </select>
+    <h3>Escolha o alimento:</h3>
+    <select id="listContainer" class="listContainer" [(ngModel)]="alimentoSel" (change)="selecionarAlimento()">
+        <option *ngFor="let alimento of alimentos" [ngValue]="alimento">
+            {{alimento.item}}
+    </select>
+    <h3>Selecione o peso do alimento:</h3>
+    <input type="number" id="i_weight" class="i_weight" placeholder="0" [(ngModel)]="weightSel">
+    <label for="i_weight" class="weight">g ou ml</label>
+    <h3>Carboidratos:</h3>
+    <p id="carbs">{{totalCHO}} CHO</p>
+    <div class="button">
+        <i class="bi bi-plus-square-fill" id="addButton" (click)="addListaAlimentos()"> Adicionar ao cardápio</i>
+    </div>
+</section>

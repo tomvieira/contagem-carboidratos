@@ -1,0 +1,34 @@
+<header>
+    <nav class="nav-bar">
+        <!--<h2>ContCarb</h2>-->
+        <ul><a routerLink="/home">Home</a></ul>
+        <ul *ngIf="username"><a routerLink="/historico">Histórico</a></ul>
+        <ul><a href="/faq">FAQ</a></ul>
+        <ul *ngIf="!username"><a routerLink="/login">Login</a></ul>
+        <div class="cart">
+            <i class="bi bi-cart" id="cart"></i>
+            <div class="cartItems">{{listItems.length}}</div>
+        </div>
+        <ul *ngIf="username"><a (click)="logout()">Olá {{username}} - Sair</a></ul>
+    </nav>
+</header>
+<main class="content">
+    <router-outlet></router-outlet>
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="{{msgClass}}" *ngIf="message">{{message}}</p>
+            <h2>Carrinho</h2>
+            <ul id="cartItemsList">
+                <div *ngFor="let item of listItems" style="margin-bottom: 1.5em;">{{item.item}}: {{item.carb}}</div>
+                <div>Total: {{totalCHO}} CHO</div>
+            </ul>
+            <input type="button" id="saveCalc" (click)="salvarCalculos()" value="Salvar Histórico" *ngIf="username" />
+        </div>
+    </div>
+</main>
+<footer>
+    <a href="https://github.com/tomvieira/contagem-carboidratos">
+        <img src="assets/img/github.png" class="github" alt="Ícone do com o logotipo do Github.">
+    </a>
+</footer>
